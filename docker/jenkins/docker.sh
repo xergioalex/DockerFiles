@@ -12,7 +12,7 @@ utils.load_environment
 if [[ "$1" == "up" ]]; then
     utils.printer "Set permissions for jenkins volume"
     mkdir -p $SERVICE_JENKINS_VOLUME_HOST
-    chown 1000 jenkins
+    chown 1000 $SERVICE_JENKINS_VOLUME_HOST
     utils.printer "Build && start services"
     docker-compose up -d jenkins
 elif [[ "$1" == "start" ]]; then
