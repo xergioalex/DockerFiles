@@ -1,0 +1,33 @@
+version: '3'
+services:
+  jenkins:
+    image: jenkins:latest
+    ports:
+      - "${SERVICE_JENKINS_PORT}"
+      - "50000:50000"
+    volumes:
+       - "${SERVICE_JENKINS_VOLUME_HOST}:/var/jenkins_home"
+    restart: on-failure
+
+  nginx:
+    image: nginx
+    volumes:
+      - /opt/nginx/config:/etc/nginx/conf.d
+      - /opt/nginx/logs:/etc/nginx/logs
+      - /opt/letsencrypt/certbot:/etc/letsencrypt
+    links:
+      - jenkins
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: on-failure
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - /opt/letsencrypt/certbot:/etc/letsencrypt
+      - /opt/letsencrypt/logs:/var/log/letsencrypt
+    ports:
+      - "80:80"
+      - "443:443"
+    command: certonly --standalone --non-interactive --agree-tos --email=${SERVICE_CERTBOT_EMAIL} ${SERVICE_CERTBOT_DOMAINS}
