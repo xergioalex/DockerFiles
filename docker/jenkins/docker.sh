@@ -73,13 +73,13 @@ elif [[ "$1" == "server.up" ]]; then
     bash docker.sh server.start $2
 elif [[ "$1" == "deploy" ]]; then
     # Build && start jenkins service
-    bash docker.local.sh up
+    bash docker.sh up
     # Set server configuration
-    bash docker.local.sh server.up $2
+    bash docker.sh server.up $2
     # Starting nginx service
-    bash docker.local.sh server.start
+    bash docker.sh server.start
 else
-    utils.printer "Usage: docker.local.sh [build|up|start|restart|stop|mongo|bash|logs n_last_lines|rm|ps]"
+    utils.printer "Usage: docker.sh [build|up|start|restart|stop|mongo|bash|logs n_last_lines|rm|ps]"
     echo -e "up --> Build && restart jenkins service"
     echo -e "start --> Start jenkins service"
     echo -e "restart --> Restart jenkins service"
