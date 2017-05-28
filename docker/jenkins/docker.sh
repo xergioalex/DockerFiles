@@ -11,10 +11,8 @@ utils.load_environment
 # Menu options
 if [[ "$1" == "config" ]]; then
     utils.printer "Set permissions for jenkins volume"
-    mkdir -p $SERVICE_JENKINS_VOLUME_HOST/home
-    mkdir -p $SERVICE_JENKINS_VOLUME_HOST/share
-    chown -R 1000:1000 $SERVICE_JENKINS_VOLUME_HOST/home
-    chown -R 1000:1000 $SERVICE_JENKINS_VOLUME_HOST/share
+    mkdir -p $SERVICE_JENKINS_VOLUME_HOST
+    chown 1000 $SERVICE_JENKINS_VOLUME_HOST
 elif [[ "$1" == "deploy" ]]; then
     bash docker.sh config 
     utils.printer "Build && start services"
