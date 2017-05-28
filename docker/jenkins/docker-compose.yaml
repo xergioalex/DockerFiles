@@ -5,6 +5,7 @@ services:
     ports:
       - "${SERVICE_JENKINS_PORT}"
       - "50000:50000"
+    working_dir: /var/jenkins_home
     volumes:
        - "${SERVICE_JENKINS_VOLUME_HOST}/home:/var/jenkins_home"
        - "${SERVICE_JENKINS_VOLUME_HOST}/share:/usr/share/jenkins"
