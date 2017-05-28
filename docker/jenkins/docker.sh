@@ -9,10 +9,12 @@ utils.check_envs_files "${ENV_FILES[@]}"
 utils.load_environment 
 
 # Menu options
-if [[ "$1" == "up" ]]; then
+if [[ "$1" == "config" ]]; then
     utils.printer "Set permissions for jenkins volume"
     mkdir -p $SERVICE_JENKINS_VOLUME_HOST
     chown 1000 $SERVICE_JENKINS_VOLUME_HOST
+elif [[ "$1" == "deploy" ]]; then
+    bash docker.sh config 
     utils.printer "Build && start services"
     docker-compose up -d jenkins
 elif [[ "$1" == "start" ]]; then
@@ -71,9 +73,9 @@ elif [[ "$1" == "server.up" ]]; then
     bash docker.sh server.config $2
     # Deploying services to remote machine server
     bash docker.sh server.start $2
-elif [[ "$1" == "deploy" ]]; then
+elif [[ "$1" == "up" ]]; then
     # Build && start jenkins service
-    bash docker.sh up
+    bash docker.sh deploy
     # Set server configuration
     bash docker.sh server.up $2
     # Starting nginx service
