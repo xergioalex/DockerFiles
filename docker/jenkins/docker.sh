@@ -17,6 +17,7 @@ elif [[ "$1" == "deploy" ]]; then
     bash docker.sh config 
     utils.printer "Build && start services"
     docker-compose up -d jenkins
+    docker-compose restart jenkins
 elif [[ "$1" == "start" ]]; then
     utils.printer "Start services"
     docker-compose start jenkins
@@ -29,7 +30,7 @@ elif [[ "$1" == "stop" ]]; then
 elif [[ "$1" == "rm" ]]; then
     if [[ "$2" == "all" ]]; then
         utils.printer "Stop && remove jenkins service"
-        docker-compose rm jenkins
+        docker-compose rm jenkins nginx
     else
         utils.printer "Stop && remove all services"
         docker-compose rm jenkins
@@ -68,6 +69,7 @@ elif [[ "$1" == "server.config" ]]; then
 elif [[ "$1" == "server.start" ]]; then
     utils.printer "Starting nginx machine..."
     docker-compose up -d nginx
+    docker-compose restart nginx
 elif [[ "$1" == "server.up" ]]; then
     # Set initial configuration in server for nginx
     bash docker.sh server.config $2
