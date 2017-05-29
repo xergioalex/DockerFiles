@@ -2,7 +2,7 @@
 . utils.sh
 
 # Create envs vars if don't exist
-ENV_FILES=(".env" "nginx/site.template")
+ENV_FILES=(".env" "nginx/site.template" "nginx/site.template.ssl")
 utils.check_envs_files "${ENV_FILES[@]}"
 
 # Load environment vars, to use from console, run follow command: 
