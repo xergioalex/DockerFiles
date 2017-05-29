@@ -35,3 +35,8 @@ function utils.load_environment {
 function utils.current_folder_name {
 	echo $(pwd | grep -o '[^/]*$') | tr "[:upper:]" "[:lower:]"
 }
+
+# Calcule host ip
+function utils.get_host_ip {
+	export SERVICE_JENKINS_DOCKERHOST=$(ifconfig | grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d: | head -n1)
+}

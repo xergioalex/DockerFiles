@@ -8,6 +8,8 @@ services:
     working_dir: /var/jenkins_home
     volumes:
        - "${SERVICE_JENKINS_VOLUME_HOST}:/var/jenkins_home"
+    extra_hosts:
+      - "dockerhost:${SERVICE_JENKINS_DOCKERHOST}"
     restart: on-failure
 
   nginx:
