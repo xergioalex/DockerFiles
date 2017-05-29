@@ -10,6 +10,8 @@ services:
        - "${SERVICE_JENKINS_VOLUME_HOST}:/var/jenkins_home"
     extra_hosts:
       - "dockerhost:${SERVICE_JENKINS_DOCKERHOST}"
+    env_file:
+      - jenkins/.env
     restart: on-failure
 
   nginx:
